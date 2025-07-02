@@ -13,6 +13,7 @@ napi = { version = "3.0.0-beta.11", features = ["async", "anyhow"] }
 napi-derive = { version = "3.0.0-beta.11", default-features = false, features = [
     "type-def",
 ] }
+oxc = { version = "0.75.0", features = ["ast_visit", "transformer"] }
 tokio = "1.45.1"
 
 [build-dependencies]
