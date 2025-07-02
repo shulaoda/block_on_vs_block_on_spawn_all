@@ -1,0 +1,23 @@
+[package]
+edition = "2021"
+name = "test"
+version = "0.0.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+anyhow = "1.0.98"
+async-scoped = { version = "0.9.0", features = ["use-tokio"] }
+napi = { version = "3.0.0-beta.11", features = ["async", "anyhow"] }
+napi-derive = { version = "3.0.0-beta.11", default-features = false, features = [
+    "type-def",
+] }
+tokio = "1.45.1"
+
+[build-dependencies]
+napi-build = { version = "2.2.1" }
+
+[profile.release]
+lto = true
+strip = "symbols"
