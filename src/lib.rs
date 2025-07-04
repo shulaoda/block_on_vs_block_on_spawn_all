@@ -109,3 +109,28 @@ pub async fn run_with_join(
     .flatten()
     .collect()
 }
+
+#[napi]
+pub async fn run_with_both(
+  callback: MaybeAsyncJsCallback<FnArgs<(String, String)>, Option<String>>,
+) -> Vec<String> {
+  let allocator = oxc::allocator::Allocator::new();
+  let mut parser_ret = oxc::parser::Parser::new(&allocator, TEST_JS, SourceType::mjs()).parse();
+  let mut visitor = TestVisitor::default();
+  visitor.visit_program(&mut parser_ret.program);
+  let futures = TESTS.into_iter().map(async |test| {
+    match callback
+      .call_async((test.to_owned(), test.to_owned()).into())
+      .await
+      .unwrap()
+    {
+      Either::A(Either::A(promise)) => promise.await.unwrap(),
+      Either::A(Either::B(ret)) => ret,
+      Either::B(_) => None,
+    }
+  });
+  block_on(block_on_spawn_all(futures))
+    .into_iter()
+    .flatten()
+    .collect()
+}

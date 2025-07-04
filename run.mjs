@@ -1,5 +1,5 @@
 import { Bench } from 'tinybench';
-import { runWithJoin, runWithBlock } from "./index.js";
+import { runWithJoin, runWithBlock, runWithBoth } from "./index.js";
 
 async function runner(v, k) {
     return Promise.resolve(v + k)
@@ -13,6 +13,10 @@ bench.add('runWithJoin', async () => {
 
 bench.add('runWithBlock', async () => {
     await runWithBlock(runner);
+});
+
+bench.add('runWithBoth', async () => {
+    await runWithBoth(runner);
 });
 
 await bench.run();

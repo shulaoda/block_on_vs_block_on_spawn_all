@@ -377,4 +377,5 @@ if (!nativeBinding) {
 
 module.exports = nativeBinding
 module.exports.runWithBlock = nativeBinding.runWithBlock
+module.exports.runWithBoth = nativeBinding.runWithBoth
 module.exports.runWithJoin = nativeBinding.runWithJoin

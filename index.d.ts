@@ -2,4 +2,6 @@
 /* eslint-disable */
 export declare function runWithBlock(callback: MaybeAsyncJsCallback<arg0: string, arg1: string, string | undefined | null>): Promise<Array<string>>
 
+export declare function runWithBoth(callback: MaybeAsyncJsCallback<arg0: string, arg1: string, string | undefined | null>): Promise<Array<string>>
+
 export declare function runWithJoin(callback: MaybeAsyncJsCallback<arg0: string, arg1: string, string | undefined | null>): Promise<Array<string>>
